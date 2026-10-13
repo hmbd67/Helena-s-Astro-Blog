@@ -20,7 +20,7 @@
     "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.3.2",
     "aws-cdk": "^2.1143.0",
-    "sharp": "^0.35.0",
+    "sharp": "^0.35.5",
     "typescript": "^6.0.3"
   },
   "allowScripts": {
