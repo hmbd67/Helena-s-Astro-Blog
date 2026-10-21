@@ -1,8 +1,14 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"],
+  "exclude": ["dist", "cdk"],
   "compilerOptions": {
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["es2022"],
+    "strict": true,
+    "types": ["jest"]
   }
 }
