@@ -1,0 +1,19 @@
+{
+  "name": "my-app-container",
+  "image": "760660183910.dkr.ecr.us-east-1.amazonaws.com/astro-blog",
+  "essential": true,
+  "portMappings": [
+    {
+      "containerPort": 8080,
+      "hostPort": 8080
+    }
+  ],
+  "logConfiguration": {
+    "logDriver": "awslogs",
+    "options": {
+      "awslogs-group": "/ecs/my-app-service",
+      "awslogs-region": "us-east-1",
+      "awslogs-stream-prefix": "ecs"
+    }
+  }
+}
