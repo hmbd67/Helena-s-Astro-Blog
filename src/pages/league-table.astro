@@ -1,0 +1,89 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { leagueTable } from '../data/leagueTable';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Tyrone Senior Camogie League Table"
+			description="Illustrative standings for the Tyrone Senior Camogie League."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Tyrone Senior Camogie League Table</h1>
+			<p class="notice">
+				<strong>Illustrative table:</strong> These fictional standings are sample content, not official
+				league results.
+			</p>
+			<p>Teams are ranked by league points, then score difference. A win is worth two league points and a draw one.</p>
+			<div class="table-scroll">
+				<table>
+					<caption>Fictional Tyrone Senior Camogie standings</caption>
+					<thead>
+						<tr>
+							<th scope="col">Team</th>
+							<th scope="col">Total points</th>
+							<th scope="col">Wins</th>
+							<th scope="col">Draws</th>
+							<th scope="col">Losses</th>
+							<th scope="col">Score difference</th>
+						</tr>
+					</thead>
+					<tbody>
+						{leagueTable.map(({ team, points, wins, draws, losses, scoreDifference }) => (
+							<tr>
+								<th scope="row">{team}</th>
+								<td>{points}</td>
+								<td>{wins}</td>
+								<td>{draws}</td>
+								<td>{losses}</td>
+								<td>{scoreDifference > 0 ? `+${scoreDifference}` : scoreDifference}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.notice {
+		padding: 1em;
+		border-left: 4px solid var(--accent);
+		background: white;
+	}
+
+	.table-scroll {
+		overflow-x: auto;
+	}
+
+	table {
+		border-collapse: collapse;
+		text-align: left;
+		white-space: nowrap;
+	}
+
+	caption {
+		margin-bottom: 0.5em;
+		font-weight: 700;
+		text-align: left;
+	}
+
+	th,
+	td {
+		padding: 0.5em 0.75em;
+		border-bottom: 1px solid rgb(var(--gray-light));
+	}
+
+	thead th {
+		background: white;
+	}
+</style>
