@@ -41,6 +41,10 @@ The `src/content/` directory contains "collections" of related Markdown and MDX 
 
 Any static assets, like images, can be placed in the `public/` directory.
 
+## Publishing match reports
+
+Write a report as a `.md` or `.mdx` file in `src/content/blog/`. Posts are published to the blog and RSS feed by default; set `draft: true` while working on a report to keep it out of public listings, its post route, and RSS. See the [match report authoring guide](./docs/content-management.md) for a copyable frontmatter template and publishing steps.
+
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
