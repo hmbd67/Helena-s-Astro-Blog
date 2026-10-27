@@ -1,14 +1,50 @@
-# Welcome to your CDK TypeScript project
+# Deploy the Astro site to ECS
 
-This is a blank project for CDK development with TypeScript.
+The `EcsStack` runs the Astro container as an ECS Fargate service behind a public
+Application Load Balancer. It uses two public subnets and does not create NAT
+gateways. Tasks receive public IPs for outbound image pulls and logging, but the
+task security group only accepts application traffic from the load balancer.
+The target group checks `/api/health` on port `4321`.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+The existing `CdkStack` S3/CloudFront stack is kept separate and is not changed
+by the container deployment workflow.
 
-## Useful commands
+## Prerequisites
 
-* `npm run build`   type-check the project
-* `npm run watch`   watch for changes and type-check
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+- An existing ECR repository for the image (default name: `astro-blog`).
+- An AWS account and region with the CDK bootstrap stack installed:
+
+  ```sh
+  npx cdk bootstrap aws://ACCOUNT_ID/REGION
+  ```
+
+- GitHub Actions repository secrets:
+  - `AWS_ACCESS_KEY_ID`
+  - `AWS_SECRET_ACCESS_KEY`
+  - `AWS_REGION`
+  - `ECR_REPOSITORY` (the existing ECR repository name)
+
+The AWS credentials need to push images to ECR and deploy the CDK stack,
+including its IAM roles, VPC, ECS service, and load balancer resources.
+
+## Deployment
+
+On each push to `main`, the workflow builds the Docker image, pushes it to ECR
+tagged with the commit SHA, then deploys `EcsStack` using that exact image tag.
+The stack output `LoadBalancerUrl` gives the public HTTP URL after deployment.
+
+To deploy manually from `cdk/`, first push the image to the existing ECR
+repository, then run:
+
+```sh
+npx cdk deploy EcsStack \
+  --context ecsOnly=true \
+  --context ecrRepositoryName=astro-blog \
+  --context imageTag=IMAGE_TAG
+```
+
+`ecsOnly=true` prevents synthesis of the existing static-site stack and avoids
+requiring its build assets during an ECS-only deployment.
+
+Fargate tasks, the Application Load Balancer, and related networking incur AWS
+charges while deployed. The default service runs one task.
