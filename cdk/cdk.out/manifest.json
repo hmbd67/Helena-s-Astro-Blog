@@ -1,40 +1,40 @@
 {
   "version": "54.0.0",
   "artifacts": {
-    "CdkStack.assets": {
+    "EcsStack.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "CdkStack.assets.json",
+        "file": "EcsStack.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "CdkStack": {
+    "EcsStack": {
       "type": "aws:cloudformation:stack",
-      "environment": "aws://760660183910/us-east-1",
+      "environment": "aws://760660183910/eu-west-1",
       "properties": {
-        "templateFile": "CdkStack.template.json",
+        "templateFile": "EcsStack.template.json",
         "terminationProtection": false,
         "validateOnSynth": false,
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::760660183910:role/cdk-hnb659fds-deploy-role-760660183910-us-east-1",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::760660183910:role/cdk-hnb659fds-cfn-exec-role-760660183910-us-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-760660183910-us-east-1/1b490bfed0ddbea45f0797835a6b51a9f642ac4a1210d4892bab349a2826464a.json",
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::760660183910:role/cdk-hnb659fds-deploy-role-760660183910-eu-west-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::760660183910:role/cdk-hnb659fds-cfn-exec-role-760660183910-eu-west-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-760660183910-eu-west-1/0ddc8d35fa4cecf72c1035f20a4020ec53882117e5eef57cc4dafcf60e34b2b1.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "CdkStack.assets"
+          "EcsStack.assets"
         ],
         "lookupRole": {
-          "arn": "arn:${AWS::Partition}:iam::760660183910:role/cdk-hnb659fds-lookup-role-760660183910-us-east-1",
+          "arn": "arn:${AWS::Partition}:iam::760660183910:role/cdk-hnb659fds-lookup-role-760660183910-eu-west-1",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }
       },
       "dependencies": [
-        "CdkStack.assets"
+        "EcsStack.assets"
       ],
-      "additionalMetadataFile": "CdkStack.metadata.json",
-      "displayName": "CdkStack"
+      "additionalMetadataFile": "EcsStack.metadata.json",
+      "displayName": "EcsStack"
     },
     "Tree": {
       "type": "cdk:tree",
