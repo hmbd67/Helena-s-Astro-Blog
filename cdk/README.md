@@ -5,6 +5,10 @@ Application Load Balancer. It uses two public subnets and does not create NAT
 gateways. Tasks receive public IPs for outbound image pulls and logging, but the
 task security group only accepts application traffic from the load balancer.
 The target group checks `/api/health` on port `4321`.
+The `AstroBlog-ALB-5xx` CloudWatch alarm enters ALARM when either the load
+balancer or its targets return one or more 5xx responses in a five-minute
+period. No SNS notification action is configured; the alarm state is visible
+in CloudWatch.
 
 The existing `CdkStack` S3/CloudFront stack is kept separate and is not changed
 by the container deployment workflow.

@@ -1,4 +1,5 @@
 import * as cdk from 'aws-cdk-lib';
+import * as cloudwatch from 'aws-cdk-lib/aws-cloudwatch';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ecr from 'aws-cdk-lib/aws-ecr';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
@@ -56,6 +57,41 @@ export class EcsStack extends cdk.Stack {
 			path: '/api/health',
 			healthyHttpCodes: '200',
 		});
+
+		const loadBalancer5xx = new cloudwatch.Metric({
+			namespace: 'AWS/ApplicationELB',
+			metricName: 'HTTPCode_ELB_5XX_Count',
+			dimensionsMap: {
+				LoadBalancer: service.loadBalancer.loadBalancerFullName,
+			},
+			statistic: 'Sum',
+			period: cdk.Duration.minutes(5),
+		});
+		const target5xx = new cloudwatch.Metric({
+			namespace: 'AWS/ApplicationELB',
+			metricName: 'HTTPCode_Target_5XX_Count',
+			dimensionsMap: {
+				LoadBalancer: service.loadBalancer.loadBalancerFullName,
+				TargetGroup: service.targetGroup.targetGroupFullName,
+			},
+			statistic: 'Sum',
+			period: cdk.Duration.minutes(5),
+		});
+		new cloudwatch.MathExpression({
+			expression: 'alb5xx + target5xx',
+			usingMetrics: { alb5xx: loadBalancer5xx, target5xx },
+			period: cdk.Duration.minutes(5),
+		})
+			.createAlarm(this, 'Alb5xxAlarm', {
+				alarmName: 'AstroBlog-ALB-5xx',
+				alarmDescription:
+					'Triggers when the Application Load Balancer or its targets return any 5xx responses in five minutes.',
+				threshold: 0,
+				evaluationPeriods: 1,
+				datapointsToAlarm: 1,
+				comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_THRESHOLD,
+				treatMissingData: cloudwatch.TreatMissingData.NOT_BREACHING,
+			});
 
 		new cdk.CfnOutput(this, 'LoadBalancerUrl', {
 			value: `http://${service.loadBalancer.loadBalancerDnsName}`,

@@ -56,4 +56,35 @@ describe('ECS service stack', () => {
 			Matcher: { HttpCode: '200' },
 		});
 	});
+
+	test('alarms when the load balancer or its targets return 5xx responses', () => {
+		template.resourceCountIs('AWS::CloudWatch::Alarm', 1);
+		template.hasResourceProperties('AWS::CloudWatch::Alarm', {
+			AlarmName: 'AstroBlog-ALB-5xx',
+			AlarmDescription:
+				'Triggers when the Application Load Balancer or its targets return any 5xx responses in five minutes.',
+			ComparisonOperator: 'GreaterThanThreshold',
+			Threshold: 0,
+			EvaluationPeriods: 1,
+			DatapointsToAlarm: 1,
+			TreatMissingData: 'notBreaching',
+			Metrics: Match.arrayWith([
+				Match.objectLike({ Expression: 'alb5xx + target5xx' }),
+				Match.objectLike({
+					MetricStat: Match.objectLike({
+						Metric: Match.objectLike({ MetricName: 'HTTPCode_ELB_5XX_Count' }),
+						Period: 300,
+						Stat: 'Sum',
+					}),
+				}),
+				Match.objectLike({
+					MetricStat: Match.objectLike({
+						Metric: Match.objectLike({ MetricName: 'HTTPCode_Target_5XX_Count' }),
+						Period: 300,
+						Stat: 'Sum',
+					}),
+				}),
+			]),
+		});
+	});
 });
