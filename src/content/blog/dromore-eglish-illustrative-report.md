@@ -3,6 +3,7 @@ title: 'Illustrative Report: Dromore Finish Strong to Nip Past Eglish'
 description: 'A fictional Tyrone camogie match report, created as an illustrative sample.'
 author: 'author'
 pubDate: 'Oct 24 2026'
+heroImage: '../../assets/camogie-match.svg'
 ---
 
 **Fictional sample report: this match and result are invented.**

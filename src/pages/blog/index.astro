@@ -48,8 +48,15 @@ const posts = (await getCollection('blog', isPublishedPost)).sort(
 				font-size: 2.369rem;
 			}
 			ul li img {
+				display: block;
+				width: 100%;
+				aspect-ratio: 2 / 1;
+				object-fit: cover;
 				margin-bottom: 0.5rem;
-				border-radius: 12px;
+				border-radius: 8px;
+				filter: blur(2px);
+				transition:
+					filter 0.2s ease;
 			}
 			ul li a {
 				display: block;
@@ -63,12 +70,12 @@ const posts = (await getCollection('blog', isPublishedPost)).sort(
 				margin: 0;
 				color: rgb(var(--gray));
 			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
+			ul li a:hover h4 {
+				color: var(--accent-dark);
 			}
 			ul a:hover img {
 				box-shadow: var(--box-shadow);
+				filter: blur(1px);
 			}
 			@media (max-width: 720px) {
 				ul {

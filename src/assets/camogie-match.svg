@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-labelledby="title description">
+	<title id="title">Camogie match in progress</title>
+	<desc id="description">Players in red and black jerseys contest possession with hurleys on a pitch.</desc>
+	<defs>
+		<linearGradient id="stands" x2="0" y2="1">
+			<stop stop-color="#181818" />
+			<stop offset="1" stop-color="#3d3d3d" />
+		</linearGradient>
+		<linearGradient id="pitch" x2="0" y2="1">
+			<stop stop-color="#fafafa" />
+			<stop offset="1" stop-color="#dedede" />
+		</linearGradient>
+	</defs>
+	<rect width="1200" height="600" fill="#f4f4f4" />
+	<path d="M0 0h1200v224H0z" fill="url(#stands)" />
+	<g fill="#b5121b" opacity=".8">
+		<circle cx="42" cy="72" r="13" /><circle cx="106" cy="116" r="12" />
+		<circle cx="179" cy="64" r="14" /><circle cx="250" cy="137" r="13" />
+		<circle cx="326" cy="82" r="12" /><circle cx="401" cy="129" r="14" />
+		<circle cx="486" cy="62" r="13" /><circle cx="560" cy="118" r="12" />
+		<circle cx="644" cy="75" r="14" /><circle cx="718" cy="139" r="12" />
+		<circle cx="800" cy="60" r="13" /><circle cx="882" cy="123" r="14" />
+		<circle cx="970" cy="72" r="12" /><circle cx="1052" cy="136" r="13" />
+		<circle cx="1144" cy="77" r="14" />
+	</g>
+	<g fill="#fff" opacity=".7">
+		<circle cx="74" cy="160" r="10" /><circle cx="216" cy="182" r="11" />
+		<circle cx="368" cy="169" r="10" /><circle cx="528" cy="183" r="11" />
+		<circle cx="688" cy="162" r="10" /><circle cx="846" cy="180" r="11" />
+		<circle cx="1007" cy="164" r="10" /><circle cx="1158" cy="181" r="11" />
+	</g>
+	<path d="M0 222h1200v378H0z" fill="url(#pitch)" />
+	<path d="M600 222v378M0 412h1200M85 222v378M1115 222v378" fill="none" stroke="#fff" stroke-width="5" opacity=".9" />
+	<ellipse cx="600" cy="412" rx="151" ry="83" fill="none" stroke="#fff" stroke-width="5" opacity=".9" />
+	<g stroke="#111" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+		<path d="m402 437-45 95m45-95 45 95m-45-95 8-97m-8 43-59 35m59-35 47 28m-37-131 46 123m-46-123 33-14" />
+		<path d="m764 432-43 99m43-99 47 99m-47-99-9-99m9 44-53 34m53-34 51 24m-35-137-48 125m48-125-31-16" />
+		<path d="m581 464-36 79m36-79 39 79m-39-79 2-82m-2 38-48 26m48-26 46 22m-34-117-39 99m39-99 27-16" />
+	</g>
+	<g>
+		<circle cx="402" cy="305" r="28" fill="#9b6549" />
+		<path d="m370 351 29-18 30 18 18 84-45 18-51-18z" fill="#b5121b" />
+		<path d="m552 343 29-18 31 18 18 119-39 15-46-15z" fill="#111" />
+		<circle cx="581" cy="297" r="27" fill="#b9825e" />
+		<circle cx="755" cy="306" r="27" fill="#d2a27e" />
+		<path d="m722 352 32-19 31 19 24 80-45 18-51-18z" fill="#fff" stroke="#111" stroke-width="7" />
+	</g>
+	<circle cx="640" cy="370" r="10" fill="#b5121b" stroke="#fff" stroke-width="4" />
+</svg>

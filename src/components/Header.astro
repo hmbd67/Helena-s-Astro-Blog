@@ -48,7 +48,8 @@ import HeaderLink from './HeaderLink.astro';
 		margin: 0;
 		padding: 0 1em;
 		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+		border-bottom: 3px solid var(--accent);
+		box-shadow: 0 2px 8px rgba(var(--black), 8%);
 	}
 	h2 {
 		margin: 0;
@@ -66,9 +67,12 @@ import HeaderLink from './HeaderLink.astro';
 	}
 	nav a {
 		padding: 1em 0.5em;
-		color: var(--black);
+		color: rgb(var(--black));
 		border-bottom: 4px solid transparent;
 		text-decoration: none;
+	}
+	nav a:hover {
+		color: var(--accent-dark);
 	}
 	nav a.active {
 		text-decoration: none;

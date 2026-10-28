@@ -3,6 +3,7 @@ title: 'Illustrative Report: Beragh Strike Late to Beat Omagh'
 description: 'A fictional Tyrone camogie match report, created as an illustrative sample.'
 author: 'author'
 pubDate: 'Oct 22 2026'
+heroImage: '../../assets/camogie-match.svg'
 ---
 
 **Fictional sample report: this match and result are invented.**
