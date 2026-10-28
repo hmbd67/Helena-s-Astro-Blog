@@ -3,6 +3,7 @@ title: 'Illustrative Report: Carrickmore Hold Off Dromore'
 description: 'A fictional Tyrone camogie match report, created as an illustrative sample.'
 author: 'author'
 pubDate: 'Oct 21 2026'
+heroImage: '../../assets/camogie-match.svg'
 ---
 
 **Fictional sample report: this match and result are invented.**

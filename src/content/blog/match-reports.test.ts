@@ -41,6 +41,7 @@ describe('illustrative Tyrone camogie match reports', () => {
 		const content = await readFile(new URL(`./${report.file}`, import.meta.url), 'utf8');
 
 		expect(content).toContain('Fictional sample report: this match and result are invented.');
+		expect(content).toContain("heroImage: '../../assets/camogie-match.svg'");
 		expect(content).toContain(report.score);
 		expect(content).toContain(report.keyEvent);
 	});
