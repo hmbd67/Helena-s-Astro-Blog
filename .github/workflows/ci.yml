@@ -35,6 +35,14 @@ jobs:
       - name: Run Unit Tests
         run: npm run test:unit
 
-      # 6. (Optional) Test building the Astro site to ensure no build errors
+      # 6. Install the CDK package dependencies
+      - name: Install CDK Dependencies
+        run: npm ci --prefix cdk
+
+      # 7. Run infrastructure tests (Jest)
+      - name: Run CDK Tests
+        run: npm --prefix cdk test -- --runInBand
+
+      # 8. Test building the Astro site to ensure no build errors
       - name: Build Project
         run: npm run build
