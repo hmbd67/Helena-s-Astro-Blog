@@ -25,8 +25,13 @@ by the container deployment workflow.
 - GitHub Actions repository secrets:
   - `AWS_ACCESS_KEY_ID`
   - `AWS_SECRET_ACCESS_KEY`
-  - `AWS_REGION`
-  - `ECR_REPOSITORY` (the existing ECR repository name)
+- Optional GitHub Actions repository variables:
+  - `AWS_REGION` (defaults to `eu-west-1`)
+  - `ECR_REPOSITORY` (defaults to `astro-blog`)
+
+The workflow creates the ECR repository if it is missing. The deployment
+identity therefore needs ECR permissions to describe and create repositories,
+as well as push and describe images.
 
 The AWS credentials need to push images to ECR and deploy the CDK stack,
 including its IAM roles, VPC, ECS service, and load balancer resources.
@@ -35,6 +40,8 @@ including its IAM roles, VPC, ECS service, and load balancer resources.
 
 On each push to `main`, the workflow builds the Docker image, pushes it to ECR
 tagged with the commit SHA, then deploys `EcsStack` using that exact image tag.
+ECR tags are immutable; if that commit's image already exists, the workflow
+reuses it instead of attempting to overwrite it.
 The stack output `LoadBalancerUrl` gives the public HTTP URL after deployment.
 
 To deploy manually from `cdk/`, first push the image to the existing ECR
